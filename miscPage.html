@@ -1,0 +1,15 @@
+<h1>This is another page. {{message}}</h1>
+
+<input [(ngModel)]="inputValue" (keyup)="updateColor()">
+<h2 [style.color]="textColor">{{inputValue | alternateCase}}</h2>
+
+
+<form [ngFormModel]="loginFormControlGroup" (submit)="onLogin()">
+    <input ngControl="username">
+    <input ngControl="password">
+    <button>Login</button>
+</form>
+Value
+<pre>{{loginFormControlGroup.value | json}}</pre>
+Validity:
+<pre>{{loginFormControlGroup.valid | json}}</pre>

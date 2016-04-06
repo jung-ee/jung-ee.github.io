@@ -1,0 +1,3 @@
+<div class="row" style="background-color:{{color}}">
+    <block [word]="singleBlock.word" [state]="singleBlock.state" [win]="gameData.win" *ngFor="#singleBlock of blocks; #idx = index" (selectBlock)="blockSelected($event)"></block>
+</div>

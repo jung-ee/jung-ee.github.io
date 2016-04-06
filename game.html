@@ -1,0 +1,11 @@
+<h2>
+    <row [blockData]="rowData" [gameData]="gameService.gameData" *ngFor="#rowData of gameService.separatedData; #idx = index" (blockBubble)="gameService.wordSelected($event)"></row>
+</h2>
+
+
+<h2 class="time rainbow">{{gameService.time$ | async}}</h2>
+
+<div>Columns: </div><input [(ngModel)]="gameService.columnCount">
+<div>Rows: </div><input [(ngModel)]="gameService.rowCount">
+
+<button class="reload-btn" (click)="gameService.reload()">Reload</button>
