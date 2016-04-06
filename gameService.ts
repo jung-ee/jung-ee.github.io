@@ -7,8 +7,8 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class GameService {
 
-    columnCount: number = 3;
-    rowCount: number = 3;
+    columnCount: number = 4;
+    rowCount: number = 4;
     isOdd: boolean;
     selectedCount: number = 0;
     lastWordSelected: any;
@@ -84,7 +84,7 @@ export class GameService {
     getSeparatedData() {
         console.log('words: ',this.words);
         let arr = this.words.slice(0, this.columnCount*this.rowCount);
-        //arr = this.shuffleArray(arr);
+        arr = this.shuffleArray(arr);
         let result = [];
         for (var i = 0; i < this.rowCount; i ++) {
             let sub = [];
