@@ -33,7 +33,12 @@ export class GameService {
             //.toPromise(Promise) // i like map more
             .map((res: Response) => res.json())
             .subscribe((data: {}[]) => {
-                this.words = data.words;
+                var shuffled = this.shuffleArray(data.words);
+                for (let i = 0; i < shuffled.length; i ++) {
+                    for (let j = 0; j < 2; j ++) {
+                        this.words.push(shuffled[i]);
+                    }
+                }
                 this.separatedData = this.getSeparatedData();
             });
 
@@ -57,7 +62,20 @@ export class GameService {
 
     reload() {
         console.log("reload: ", this.columnCount, this.rowCount);
+        // don't do more than 10x10
+        if (this.columnCount > 10) {
+            this.columnCount = 10;
+        } else if (this.columnCount <= 0) {
+            this.columnCount = 4;
+        }
+        if (this.rowCount > 10) {
+            this.rowCount = 10;
+        } else if (this.rowCount <= 0) {
+            this.rowCount = 4;
+        }
+
         this.isOdd = (this.columnCount*this.rowCount) % 2 === 0? false : true;
+        this.matchedCount = 0;
         this.stateData = this.getStateArray();
         this.separatedData = this.getSeparatedData();
         this.gameData.win = false;
@@ -82,29 +100,27 @@ export class GameService {
     }
 
     getSeparatedData() {
-        console.log('words: ',this.words);
-        let arr = this.words.slice(0, this.columnCount*this.rowCount);
+        let size = this.isOdd ? this.columnCount*this.rowCount-1 : this.columnCount*this.rowCount;
+        let arr = this.words.slice(0, size);
         arr = this.shuffleArray(arr);
         let result = [];
         for (var i = 0; i < this.rowCount; i ++) {
             let sub = [];
-            for (var j = i*this.columnCount; j < (i+1)*this.columnCount; j ++) {
+            for (var j = i*this.columnCount; j < (i+1)*this.columnCount && j < size; j ++) {
                 sub.push({word: arr[j], state: this.stateData[j]});
             }
             // if it is the last row, take off the last block if it's odd
-            if (this.isOdd && i === this.rowCount-1) {
-                result.push(sub.slice(0,this.columnCount-1));
-            } else {
+            //if (this.isOdd && i === this.rowCount-1) {
+            //    result.push(sub.slice(0,this.columnCount-1));
+            //} else {
                 result.push(sub);
-            }
+            //}
         }
-        console.log(result);
+
         return result;
     }
 
     wordSelected(elem) {
-
-        console.log("word selected: ", elem.word);
 
         this.selectedCount ++;
 
@@ -120,9 +136,9 @@ export class GameService {
         this.lastWordSelected = elem;
 
         if (this.selectedCount % 2 === 0) {
-            console.log('pair selected');
+
             if (this.last2ndWordSelected && this.last2ndWordSelected.word === this.lastWordSelected.word) {
-                console.log("matched!!");
+
                 this.matchFound = true;
                 this.last2ndWordSelected.matched = true;
                 this.lastWordSelected.matched = true;
@@ -132,17 +148,8 @@ export class GameService {
                     this.gameData.win = true;
                 }
             } else {
-                // cover both up again after a delay
-                let _this = this;
-                /*timeout = setTimeout(() => {
-                    _this.lastWordSelected.coverOff = false;
-                    elem.coverOff = false;
-                }, 1400);*/ // messes up the game if you really fast in between this delay
                 this.matchFound = false;
             }
-        } else {
-            //debugger;
-
         }
     }
 }

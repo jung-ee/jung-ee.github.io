@@ -1,5 +1,12 @@
 {
-  "words": ["apple", "apple", "cat", "cat", "peach", "peach", "candy", "candy", "water", "water", "paper",
-    "paper", "rock", "rock", "flower", "flower", "shark", "shark", "shoe", "shoe", "bottle", "bottle", "house",
-    "house", "key", "key", "store", "store", "book", "book", "tree", "tree", "person", "person", "ball", "ball"]
+  "words": ["animal", "apple", "army", "art", "ball", "bat", "bike", "book", "book", "bottle", "box", "cage", "cake",
+    "camera", "candy", "car", "cat", "cell", "code", "computer", "country", "customer", "day", "disk", "dog", "driver",
+    "energy", "event", "family", "fisbee", "flight", "flower", "goal", "hand", "house", "idea", "key", "lake", "language",
+    "letter", "library", "lunch", "marriage", "math", "meaning", "meat", "medicine", "meeting", "member", "message",
+    "mood", "moon", "movie", "news", "night", "office", "oven", "paper", "peach", "people", "person", "pet", "phone",
+    "photo", "piano", "pie", "pizza", "president", "road", "rock", "shark", "shoe", "shopping", "song", "sound", "soup",
+    "star", "store", "story", "strategy", "success", "sun", "sushi", "teacher", "thanks", "thing", "train", "tree",
+    "tree", "truth", "unit", "water", "week", "world"]
 }
+
+

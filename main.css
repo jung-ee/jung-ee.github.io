@@ -1,3 +1,7 @@
+.container {
+    margin-bottom: 40px;
+}
+
 row {
     display: block;
 }
@@ -58,8 +62,31 @@ row {
 
 .time {
     display: inline-block;
+    margin-left: 20px;
+    height: 26px;
 }
 
 .reload-btn {
-    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 2px solid #ddd;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.dimensions {
+    margin: 20px auto;
+}
+
+.dimensions input {
+    height: 30px;
+    width: 88px;
+    padding-left: 6px;
+    font-size: 14px;
+}
+
+.bound {
+    display: inline-block;
+    margin-right: 10px;
 }
