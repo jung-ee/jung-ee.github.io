@@ -16,6 +16,8 @@ export class GameService {
     matchFound: boolean = false;
     matchedCount: number = 0;
     time$: Observable<string>;
+    startTime: Date;
+    timeValue$: Observable<any>;
 
     words: string[] = [];
     separatedData: any[] = [];
@@ -29,6 +31,7 @@ export class GameService {
 
     constructor(http: Http) {
         this.isOdd = (this.columnCount*this.rowCount) % 2 === 0? false : true;
+        this.startTime = new Date();
         http.get('data.json')
             //.toPromise(Promise) // i like map more
             .map((res: Response) => res.json())
@@ -50,6 +53,37 @@ export class GameService {
                 clearInterval(interval);
             }
         });
+
+        this.timeValue$ = new Observable((observer: any) => {
+            let interval = setInterval(() => {
+                let getTimeString = (currentTime, startTime) => {
+                    let numSeconds = Math.floor((currentTime - startTime)/1000);
+
+                    let hourStr = ' hours, ';
+                    let minStr = ' minutes, ';
+                    let secStr = ' seconds';
+                    let hourVal = 0;
+                    let minVal = 0;
+                    let secVal = 0;
+                    if (numSeconds < 60) {
+                        secVal = numSeconds;
+                    } else if (numSeconds >= 60 && numSeconds < 60*60) {
+                        minVal = Math.floor(numSeconds/60);
+                        secVal = numSeconds % 60;
+                    } else if (numSeconds >= 60*60) {
+                        hourVal = Math.floor(numSeconds/(60*60));
+                        modVal = numSeconds % (60*60);
+                        minVal = Math.floor(modVal/60);
+                        secVal = modVal % 60;
+                    }
+                    return hourVal + hourStr + minVal + minStr + secVal + secStr;
+                };
+                observer.next(getTimeString(new Date(), this.startTime));
+            }, 1000);
+            return () => {
+                clearInterval(interval);
+            }
+        })
     }
 
     getCountArray() {
@@ -61,7 +95,8 @@ export class GameService {
     }
 
     reload() {
-        console.log("reload: ", this.columnCount, this.rowCount);
+        console.log("reload: ", this.columnCount, this.rowCount)
+        this.startTime = new Date();
         // don't do more than 10x10
         if (this.columnCount > 10) {
             this.columnCount = 10;

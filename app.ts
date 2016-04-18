@@ -6,9 +6,9 @@ import {Title} from "angular2/platform/browser";
 import {Router, RouteConfig, RouteParams, ROUTER_DIRECTIVES, ROUTER_PROVIDERS,
     LocationStrategy, HashLocationStrategy} from "angular2/router";
 
-import {Row} from './row.ts';
-import {AlternateCasePipe} from './pipe.ts';
-import {GameService} from './gameService.ts'
+import {Row} from './scripts/row.ts';
+import {AlternateCasePipe} from './scripts/pipe.ts';
+import {GameService} from './scripts/gameService.ts'
 import {HomeComponent} from "../32-auxiliary-routes/components";
 
 @Inject ()  // can inject service into another service... can't see a good use case for it being inline though.
@@ -30,7 +30,7 @@ const jsonRequestHeaders = {
 
 @Component({
     selector: 'misc',
-    templateUrl: 'miscPage.html',
+    templateUrl: 'templates/miscPage.html',
     pipes: [AlternateCasePipe]
 })
 class miscComponent {
@@ -54,7 +54,7 @@ class miscComponent {
 
 @Component({
     selector: 'home',
-    templateUrl: 'game.html',
+    templateUrl: 'templates/game.html',
     directives: [Row],
     providers: [GameService]
 })
@@ -69,7 +69,7 @@ class homeComponent {
 
 @Component ({
     selector: 'ju-app',
-    templateUrl: 'app.html',
+    templateUrl: 'templates/app.html',
     directives: [Row, ROUTER_DIRECTIVES],
     providers: [GameService, FakeService]
 })

@@ -3,7 +3,7 @@ import {Block} from './block.ts';
 
 @Component ({
     selector: 'row',
-    templateUrl: 'row.html',
+    templateUrl: 'templates/row.html',
     directives: [Block]
 })
 export class Row {

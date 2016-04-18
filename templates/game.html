@@ -1,4 +1,5 @@
 <div><h2 class="time rainbow">{{gameService.time$ | async}}</h2></div>
+<div>Elapsed Time: {{gameService.timeValue$ | async}} {{timeUnit}}</div>
 
 <h2 class="container">
     <row [blockData]="rowData" [gameData]="gameService.gameData" *ngFor="#rowData of gameService.separatedData; #idx = index" (blockBubble)="gameService.wordSelected($event)"></row>
