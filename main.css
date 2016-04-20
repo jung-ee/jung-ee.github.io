@@ -18,6 +18,7 @@ row {
     margin: 4px;
     line-height: 100px;
     text-align: center;
+    border-radius: 10px;
 }
 
 .block-cover.cover-off {
@@ -30,10 +31,26 @@ row {
     position: absolute;
     background-color: teal;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .matched {
     background-color: lightcyan !important;
+}
+
+.time-container {
+    display: inline-block;
+    background: black;
+    color: #ddd;
+    padding: 0 8px 0 8px;
+    border-radius: 18px;
+}
+
+.colorful-time {
+    display: inline-block;
+    font-weight: bold;
+    vertical-align: text-top;
+    line-height: 14px;
 }
 
 .rainbow {
@@ -58,12 +75,24 @@ row {
             #465298 20px
     );
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    border-radius: 8px;
+}
+
+.time-row {
+    text-align: right;
 }
 
 .time {
     display: inline-block;
-    margin-left: 20px;
+    margin: 4px 2px 8px 4px;
     height: 26px;
+}
+
+.elapsed-time {
+    margin: 34px auto 20px;
+    padding-left: 10px;
+    background-color: #dedede;
+    line-height: 34px;
 }
 
 .reload-btn {

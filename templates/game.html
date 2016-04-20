@@ -1,10 +1,9 @@
-<div><h2 class="time rainbow">{{gameService.time$ | async}}</h2></div>
-<div>Elapsed Time: {{gameService.timeValue$ | async}} {{timeUnit}}</div>
-
-<h2 class="container">
-    <row [blockData]="rowData" [gameData]="gameService.gameData" *ngFor="#rowData of gameService.separatedData; #idx = index" (blockBubble)="gameService.wordSelected($event)"></row>
-</h2>
-
+<div class="time-row">
+    <div class="time-container">
+        <div class="colorful-time">Colorful Time: </div>
+        <h2 class="time rainbow">{{gameService.time$ | async}}</h2>
+    </div>
+</div>
 
 <div class="dimensions">
     <h4 style="font-style: italic;">Enter a value for column and row between 1 and 10</h4>
@@ -12,3 +11,11 @@
     <div class="bound"><div>Rows: </div><input [(ngModel)]="gameService.rowCount" type="number" min="1" max-length="1"></div>
     <button class="reload-btn" (click)="gameService.reload()">Reload</button>
 </div>
+
+<div class="elapsed-time">Elapsed Time: {{gameService.timeValue$ | async}}</div>
+
+<h2 class="container">
+    <row [blockData]="rowData" [gameData]="gameService.gameData" *ngFor="#rowData of gameService.separatedData; #idx = index" (blockBubble)="gameService.wordSelected($event)"></row>
+</h2>
+
+

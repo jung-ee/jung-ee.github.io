@@ -36,12 +36,7 @@ export class GameService {
             //.toPromise(Promise) // i like map more
             .map((res: Response) => res.json())
             .subscribe((data: {}[]) => {
-                var shuffled = this.shuffleArray(data.words);
-                for (let i = 0; i < shuffled.length; i ++) {
-                    for (let j = 0; j < 2; j ++) {
-                        this.words.push(shuffled[i]);
-                    }
-                }
+                this.shuffleWords(data.words);
                 this.separatedData = this.getSeparatedData();
             });
 
@@ -110,7 +105,13 @@ export class GameService {
         }
 
         this.isOdd = (this.columnCount*this.rowCount) % 2 === 0? false : true;
+        this.matchFound = false;
         this.matchedCount = 0;
+        this.selectedCount = 0;
+        this.lastWordSelected = null;
+        this.last2ndWordSelected = null;
+
+        this.shuffleWords(this.words);
         this.stateData = this.getStateArray();
         this.separatedData = this.getSeparatedData();
         this.gameData.win = false;
@@ -124,6 +125,16 @@ export class GameService {
             array[j] = temp;
         }
         return array;
+    }
+
+    shuffleWords(words) {
+        var shuffled = this.shuffleArray(words);
+        this.words = [];
+        for (let i = 0; i < shuffled.length; i ++) {
+            for (let j = 0; j < 2; j ++) {
+                this.words.push(shuffled[i]);
+            }
+        }
     }
 
     getStateArray() {
